@@ -27,6 +27,8 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+reset_show.py
+clear_db.py
 
 # Airflow
 airflow-logs/
