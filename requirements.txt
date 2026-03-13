@@ -8,8 +8,6 @@ python-dotenv>=1.0.1
 # Database & Vector Drivers
 oracledb>=2.2.0
 
-# Observability
-langfuse==4.0.0
 
 # Polling & Integration
 apscheduler>=3.10.4
