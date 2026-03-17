@@ -275,7 +275,7 @@ export default function App() {
       <header className="topbar">
         <div className="brand" onClick={() => setView('dashboard')} style={{cursor: 'pointer'}}>
           <Activity size={28} className="brand-icon" />
-          <h1 className="brand-title">Synchrony SRE Dashboard</h1>
+          <h1 className="brand-title">Agentic SRE Dashboard</h1>
         </div>
         <div className="topbar-right">
           <div className="quick-links">
