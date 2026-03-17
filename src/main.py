@@ -29,7 +29,7 @@ POLL_INTERVAL = int(os.getenv("POLL_INTERVAL_SECONDS", "30"))
 # ─────────────────────────────── UI state helpers ────────────────────────────
 
 def ts():
-    return datetime.datetime.now().strftime("%H:%M:%S")
+    return datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
 
 # State operations mapped to PostgreSQL via db.py
 
@@ -232,7 +232,7 @@ def process_run(dag_id: str, run: dict, cycle: int):
 
 def start_poller():
     print("=" * 52)
-    print("   SYNCHRONY AGENTIC POLLER — REAL AIRFLOW MODE")
+    print("   AGENTIC AI POLLER — REAL AIRFLOW MODE")
     print("   soul.md loaded as system prompt")
     print("=" * 52)
 

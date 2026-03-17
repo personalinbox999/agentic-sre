@@ -109,7 +109,7 @@ def write_state(state: dict):
 def patch_state(patch: dict):
     state = read_state()
     state.update(patch)
-    state["last_updated"] = datetime.datetime.now().strftime("%H:%M:%S")
+    state["last_updated"] = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
     write_state(state)
 
 def append_event(event: dict):
@@ -125,7 +125,7 @@ def append_event(event: dict):
     except Exception as e:
         print(f"[DB API] Error appending event: {e}")
     
-    write_state({"last_updated": datetime.datetime.now().strftime("%H:%M:%S")})
+    write_state({"last_updated": datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S")})
 
 def get_recent_events(limit: int = 15) -> list[dict]:
     """Retrieves the most recent events for Chat Context."""

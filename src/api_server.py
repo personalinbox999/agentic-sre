@@ -61,6 +61,7 @@ def _run_ingestion():
         with _lock:
             _status["last_run"] = datetime.datetime.now().strftime("%H:%M:%S")
             _status["last_result"] = "success" if success else "error"
+            
     except Exception as e:
         with open(INGEST_LOG_PATH, "a") as f:
             f.write(f"\n[ERROR] {e}\n")
@@ -182,15 +183,11 @@ class ControlHandler(BaseHTTPRequestHandler):
                     model="minimax/minimax-m2.5",
                 )
                 
-                sys_prompt = (
-                    "You are the Synchrony SRE Assistant. Respond in a professional, technical, and helpful manner.\n\n"
-                    "FORMATTING RULES:\n"
-                    "1. ALWAYS use Markdown tables when listing multiple incidents, jobs, or metrics. This is mandatory for readability.\n"
-                    "2. Use bold text for technical terms (e.g. **OOM**, **DAG**, **Runbook**).\n"
-                    "3. If a task was successful after retry, mention it clearly.\n"
-                    "4. Be concise but ensure all technical details from the context are preserved.\n\n"
-                    f"RECENT EVENTS CONTEXT (Airflow/ServiceNow JSON log):\n{context_str}"
-                )
+                chatbot_md_path = os.path.join(PROJECT_ROOT, "src", "chatbot.md")
+                with open(chatbot_md_path, "r") as f:
+                    base_prompt = f.read()
+                    
+                sys_prompt = f"{base_prompt}\n\nRECENT EVENTS CONTEXT (Airflow/ServiceNow JSON log):\n{context_str}"
                 
                 response = llm.invoke([
                     SystemMessage(content=sys_prompt),
